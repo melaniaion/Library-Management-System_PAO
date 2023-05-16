@@ -6,11 +6,11 @@ public class Student extends Person{
     private String favoriteGenre;
 
     public Student(){}
-    public Student(String firstName, String lastName, int age, String university, String student_id_card, String favorite_genre) {
-        super(firstName, lastName, age);
+    public Student(int id, String firstName, String lastName, int age, String university, String studentIdCard, String favoriteGenre) {
+        super(id,firstName, lastName, age);
         this.university = university;
-        this.studentIdCard = student_id_card;
-        this.favoriteGenre = favorite_genre;
+        this.studentIdCard = studentIdCard;
+        this.favoriteGenre = favoriteGenre;
     }
 
     public String getUniversity() {
@@ -45,7 +45,7 @@ public class Student extends Person{
         output += "Age: " + this.age + " years\n";
         output += "University: " + this.university + "\n";
         output += "Student id card: " + this.studentIdCard + "\n";
-        output += " Favorite genre: " + this.favoriteGenre + "\n";
+        output += "Favorite genre: " + this.favoriteGenre + "\n";
 
         return output;
     }

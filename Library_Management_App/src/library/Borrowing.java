@@ -16,7 +16,7 @@ public class Borrowing {
     protected Book book;
     protected Librarian librarian;
 
-    protected LocalDate DateWhenBorrowed;
+    protected LocalDate dateWhenBorrowed;
     protected LocalDate returnedDate;
     private static final AtomicInteger sequence = new AtomicInteger();
     protected int borrowingCode;
@@ -28,9 +28,19 @@ public class Borrowing {
         book.setQuantity(book.getQuantity() - 1);
         this.book = book;
         this.librarian = librarian;
-        this.DateWhenBorrowed = LocalDate.now();
+        this.dateWhenBorrowed = LocalDate.now();
         this.returnedDate = null;
-        this.borrowingCode = sequence.incrementAndGet();
+        this.borrowingCode = sequence.incrementAndGet() * 11;
+    }
+
+    public Borrowing(Student student, Book book, Librarian librarian,int borrowingCode,LocalDate dateWhenBorrowed, LocalDate returnedDate) {
+        this.student = student;
+        this.book = book;
+        this.librarian = librarian;
+        this.dateWhenBorrowed = dateWhenBorrowed;
+        this.returnedDate = returnedDate;
+        sequence.incrementAndGet();
+        this.borrowingCode = borrowingCode;
     }
 
     public Student getStudent() {
@@ -46,10 +56,10 @@ public class Borrowing {
     }
 
     public LocalDate getDateWhenBorrowed() {
-        return DateWhenBorrowed;
+        return dateWhenBorrowed;
     }
 
-    public LocalDate getReturn_date() {
+    public LocalDate getReturnedDate() {
         return returnedDate;
     }
 
@@ -70,7 +80,7 @@ public class Borrowing {
     }
 
     public void setDateWhenBorrowed(LocalDate dateWhenBorrowed) {
-        this.DateWhenBorrowed = dateWhenBorrowed;
+        this.dateWhenBorrowed = dateWhenBorrowed;
     }
 
     public void setReturn_date(LocalDate return_date) {
@@ -88,7 +98,7 @@ public class Borrowing {
         output += "Book serial number: " + this.book.getSerialNumber() + "\n";
         output += "Librarian: " + this.librarian.getFirstName() + " " + this.librarian.getLastName() + " with code: " + this.librarian.getLibrarianId() + "\n";
         DateTimeFormatter myformatDateB = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDateB = this.DateWhenBorrowed.format(myformatDateB);
+        String formattedDateB = this.dateWhenBorrowed.format(myformatDateB);
         output += "The book was borrowed on: " + formattedDateB + "\n";
         if (returnedDate != null){
             DateTimeFormatter myformatDateR = DateTimeFormatter.ofPattern("dd-MM-yyyy");

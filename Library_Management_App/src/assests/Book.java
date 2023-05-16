@@ -5,7 +5,7 @@ public class Book {
     protected String name;
     protected int yearOfPublication;
 
-    private static final int serialGenerator = 200;
+    private static int serialGenerator = 200;
     protected int serialNumber;
     protected int quantity;
 
@@ -16,7 +16,16 @@ public class Book {
         this.name = name;
         this.yearOfPublication = year_of_publication;
         this.quantity = quantity;
-        serialNumber = (serialGenerator + year_of_publication) * 10;
+        serialGenerator++;
+        this.serialNumber = serialGenerator + year_of_publication;
+    }
+    public Book(Author author, String name, int year_of_publication, int quantity, int serialNumber) {
+        this.author = author;
+        this.name = name;
+        this.yearOfPublication = year_of_publication;
+        this.quantity = quantity;
+        serialGenerator++;
+        this.serialNumber = serialNumber;
     }
 
     public Author getAuthor() {

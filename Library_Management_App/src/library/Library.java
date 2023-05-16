@@ -9,42 +9,52 @@ import people.Student;
 import java.util.*;
 
 public class Library {
-    Address libraryAddress;
     List<Borrowing> borrowings;
     Set<Student> students;
+    Set<Address> addresses;
     Set<Author> authors;
     Set<Book> books;
-    Admin admin;
-    Librarian librarian1;
-    Librarian librarian2;
     List<Librarian> librarians;
+    List<Admin> admins;
 
-    public Library(){
+    public  Library(){
         books = new HashSet<>();
         students = new HashSet<>();
         borrowings = new ArrayList<>();
-        libraryAddress = new Address();
-        admin = new Admin();
+        admins = new ArrayList<>();
         librarians = new ArrayList<>();
-        librarian1 = new Librarian("Lily","Smith", 30,10,"fiction");
-        librarian2 = new Librarian("Noah","Williams",40,15,"non-fiction");
-        librarians.add(librarian1);
-        librarians.add(librarian2);
         authors = new HashSet<>();
+        addresses = new HashSet<>();
     }
 
-    public Library(Address library_address, List<Borrowing> borrowings, Set<Student> students,Set<Author>authors, Set<Book> books, Admin admin, List<Librarian> librarians) {
-        this.libraryAddress = library_address;
+    public Library(List<Borrowing> borrowings, Set<Student> students, Set<Address> addresses, Set<Author> authors, Set<Book> books,List<Librarian> librarians, List<Admin> admins) {
         this.borrowings = borrowings;
         this.students = students;
-        this.books = books;
-        this.admin = admin;
-        this.librarians = librarians;
+        this.addresses = addresses;
         this.authors = authors;
+        this.books = books;
+        this.librarians = librarians;
+        this.admins = admins;
     }
 
-    public void setLibraryAddress(Address libraryAddress) {
-        this.libraryAddress = libraryAddress;
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public void setLibrarians(List<Librarian> librarians) {
+        this.librarians = librarians;
+    }
+
+    public List<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(List<Admin> admins) {
+        this.admins = admins;
     }
 
     public void setBorrowings(List<Borrowing> borrowings) {
@@ -59,16 +69,8 @@ public class Library {
         this.books = books;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
     public void setLibrarians(ArrayList<Librarian> librarians) {
         this.librarians = librarians;
-    }
-
-    public Address getLibraryAddress() {
-        return libraryAddress;
     }
 
     public List<Borrowing> getBorrowings() {
@@ -81,10 +83,6 @@ public class Library {
 
     public Set<Book> getBooks() {
         return books;
-    }
-
-    public Admin getAdmin() {
-        return admin;
     }
 
     public List<Librarian> getLibrarians() {
@@ -102,8 +100,15 @@ public class Library {
     @Override
     public String toString(){
         String output = "-- Details about the library --\n\n";
-        output +=  this.libraryAddress.toString() + "\n\n";
 
+        if(addresses.size() == 0){
+            output += "We don't have a location yet. \n";
+        }
+        else{
+            for(Address address : addresses){
+                output += address.toString() + "\n\n";
+            }
+        }
         if(librarians.size() == 0){
             output += "We haven't hired librarians yet. \n";
         }
@@ -190,6 +195,11 @@ public class Library {
 
     }
 
+    public void deleteStudent(String studentIdCard){
+        Student student = searchStudent(studentIdCard);
+        students.remove(student);
+    }
+
     public void borrowBook(Borrowing borrowing){
         borrowings.add(borrowing);
     }
@@ -210,6 +220,10 @@ public class Library {
 
     public void registerStudent(Student student){
         students.add(student);
+    }
+
+    public void addLibrarian(Librarian librarian){
+        librarians.add(librarian);
     }
 
     public Student searchStudent(String card){
@@ -249,5 +263,37 @@ public class Library {
         return null;
     }
 
+    public Author searchAuthor(int id){
+        for (Author author : authors){
+            if (id == author.getId()){
+                return author;
+            }
+        }
+        return null;
+    }
+
+    public void deleteAuthor(Author author){
+        authors.remove(author);
+    }
+
+    public void addAdmin(Admin admin) {admins.add(admin);}
+    public void addAddress(Address address) {addresses.add(address);}
+    public void printAddress(){
+        for (Address address : addresses){
+            System.out.println(address.toString());
+        }
+    }
+
+    public void updateAddress(int id,String country,String city,int zipCode,String street,int number){
+        for (Address address :addresses){
+            if (id == address.getId()){
+                address.setCountry(country);
+                address.setCity(city);
+                address.setZipCode(zipCode);
+                address.setNumber(number);
+                address.setStreet(street);
+            }
+        }
+    }
 
 }

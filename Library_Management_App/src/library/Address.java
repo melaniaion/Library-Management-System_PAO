@@ -1,6 +1,7 @@
 package library;
 
 public class Address {
+    private int id;
     protected String country;
     protected String city;
     protected int zipCode;
@@ -8,6 +9,7 @@ public class Address {
     protected int number;
 
     public Address(){
+        this.id = 1;
         this.country = "United States";
         this.city = "Los Angeles";
         this.street = "South Spring Street";
@@ -15,12 +17,21 @@ public class Address {
         this.zipCode =  90014;
     }
 
-    public Address(String country, String city, int zip_code, String street, int number) {
+    public Address(int id, String country, String city, int zip_code, String street, int number) {
+        this.id = id;
         this.country = country;
         this.city = city;
         this.zipCode = zip_code;
         this.street = street;
         this.number = number;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCountry() {

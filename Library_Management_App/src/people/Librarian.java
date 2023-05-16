@@ -3,17 +3,24 @@ package people;
 public class Librarian extends Person{
     protected int experience;
     protected String specialization;
-    private static int number = 0;
     protected int librarianId;
+    protected static int counter = 0;
 
     public Librarian(){}
 
-    public Librarian(String firstName, String lastName, int age, int experience, String specialization) {
-        super(firstName, lastName, age);
+    public Librarian(int id,String firstName, String lastName, int age, int experience, String specialization) {
+        super(id,firstName, lastName, age);
         this.experience = experience;
         this.specialization = specialization;
-        number = number + 1;
-        this.librarianId = number * age * 11;
+        counter++;
+        this.librarianId = (age * 10) + counter;
+    }
+    public Librarian(int id,String firstName, String lastName, int age, int experience, String specialization,int librarianId) {
+        super(id,firstName, lastName, age);
+        this.experience = experience;
+        this.specialization = specialization;
+        counter++;
+        this.librarianId = librarianId;
     }
 
     public int getExperience() {

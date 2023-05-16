@@ -1,6 +1,8 @@
 package assests;
 
 public class Author {
+    protected  int id;
+
     protected String name;
     protected String birthdate;
     protected String nationality;
@@ -10,11 +12,20 @@ public class Author {
     public Author(){
 
     }
-    public Author(String name, String birthdate, String nationality, String genre) {
+    public Author(int id,String name, String birthdate, String nationality, String genre) {
+        this.id = id;
         this.name = name;
         this.birthdate = birthdate;
         this.nationality = nationality;
         this.genre = genre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -54,6 +65,7 @@ public class Author {
     {
         String output = "- Info about the author -\n";
         output += "--------------------------------------\n";
+        output += "Author's id: " + this.id + "\n";
         output += "Author's name: " + this.name + "\n";
         output += "Date of birth: " + this.birthdate + "\n";
         output += "Nationality: " + this.nationality + "\n";
